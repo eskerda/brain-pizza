@@ -7,4 +7,3 @@ Makefile.*
 *.opensdf
 *.suo
 debug
-/bin
