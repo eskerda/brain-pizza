@@ -15,9 +15,9 @@ uniform vec2 tilemapSize;
 
 void main()
 {
-    float index=clamp(texture2D(tilemap,gl_TexCoord[0].xy/tileSize).r*256,0,1);
+    float index=texture2D(tilemap,gl_TexCoord[0].xy/tileSize).r*256;
     vec2 tilePos=vec2(mod(index,tileCount.x),floor(index/tileCount.x))/tileCount;
     vec2 tileOffset=mod((gl_TexCoord[0].xy*tilemapSize)/tileSize,1.0);
-    gl_FragColor=vec4(index/256.f,0,texture2D(tileGraphics,tilePos+tileOffset/tileCount).b,1);
-    //gl_FragColor=texture2D(tileGraphics,tilePos+tileOffset/tileCount);
+    //gl_FragColor=vec4(index/256.f,0,texture2D(tileGraphics,tilePos+tileOffset/tileCount).b,1);
+    gl_FragColor=texture2D(tileGraphics,tilePos+tileOffset/tileCount);
 }
