@@ -1,0 +1,10 @@
+Makefile
+Makefile.*
+/SfmlBase.sdf
+*.user
+/obj
+/ipch
+*.opensdf
+*.suo
+debug
+/bin
