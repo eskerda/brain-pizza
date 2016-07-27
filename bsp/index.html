@@ -1,0 +1,51 @@
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <title>Floor generation using BSPs</title>
+</head>
+<body>
+  <p>Yet another take at BSP, like <a href="/demos/dungeon/">/demos/dungeon</a> with less cruft</p>
+  <p>Trying to go for <a href="http://i.imgur.com/6KBgLyw.jpg">these kind of rooms</a> (separatedly) from <a href="http://zombicide.com/">zombicide</a>.</p>
+  <div class="canvas">
+    <div class="error"></div>
+    <canvas id="viewport" width="1024" height="500"></canvas>
+  </div>
+  <div class="controls">
+    <ul>
+      <li>
+        <label>Width</label>
+        <input name="width" type="number" value="15" min="1">
+      </li>
+      <li>
+        <label>Height</label>
+        <input name="height" type="number" value="10" min="1">
+      </li>
+      <li>
+        <label>Steps</label>
+        <input name="steps" type="number" value="2" min="0">
+      </li>
+      <li>
+        <label>Discard <</label>
+        <input name="discard" type="number" value="3" min="0">
+      </li>
+    </ul>
+    <ul>
+      <li><pre id="raster"></pre></li>
+      <li>
+        <input name="seed" value="" type="text">
+        <button name="load">Load Seed</button>
+        <button name="new_seed">Generate a new seed and load!</button>
+      </li>
+      <li>
+        <label>Allow full rooms</label>
+        <input type="checkbox" value="on" name="fullrooms" checked>
+      </li>
+    </ul>
+    </div>
+
+<script src="vendor/jquery.js"></script>
+<script src="vendor/seedrandom/seedrandom.js"></script>
+<script src="vendor/md5.js"></script>
+<script src="code.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+html, body {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+body {
+    background-color: #000;
+    color: #FFF;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+* {
+    font-family: monospace;
+    color: #FFF;
+}
+
+div.canvas {
+  position: relative;
+  width: 1024px;
+  height: 500px;
+  background-color: #000;
+  margin: 0 auto;
+  display: block;
+}
+
+div.canvas .error {
+  position: absolute;
+  border: solid 1px #0F0;
+  top: 50px;
+  left: 0px;
+  right: 0px;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,0.8);
+  overflow: auto;
+  width: 300px;
+  height: 300px;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 1.2em;
+  display: none;
+}
+
+div.canvas .error.visible {
+    display: block;
+}
+div.canvas canvas {
+  width: 100%;
+  height: 100%;
+}
+
+p {
+  text-align: center;
+}
+h1 {
+  text-align: center;
+}
+
+div.controls {
+    text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+ul li {
+    margin: 2.5px;
+}
+
+input, button {
+    border-radius: 4px;
+}
+
+button {
+    border: none;
+    background-color: #111;
+    height: 40px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #222;
+}
+
+button:active {
+    background-color: #333;
+}
+
+label {
+    min-width: 100px;
+    display: inline-block;
+    text-align: right;
+}
+input {
+    background-color: #111;
+    border: none;
+    padding: 10px;
+}
+
+input:focus {
+    background-color: #222;
+}
+input[type=number] {
+    text-align: center;
+    width: 60px;
+    padding: 6px;
+    height: 30px;
+}
+
+input[name=seed] {
+    width: 300px;
+    text-align: center;
+    height: 40px;
+}
+button[name=new_seed] {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+}
+
