@@ -11,7 +11,6 @@ public:
     ZombieTileMap(const std::vector< std::vector<char> >& tiles, const std::string& textureFile, int tileSize);
 
     void LoadTileMap(const std::vector< std::vector<char> >& tiles);
-    void LoadTileSheet(const std::string& textureFile, int tileSize);
 
     int GetTileSize() { return _tileSize; }
 

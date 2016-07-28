@@ -8,10 +8,9 @@
 uniform sampler2D tilemap;
 uniform sampler2D tileGraphics;
 
-const int tileSize = 240;
 uniform vec2 tileCount;
 uniform vec2 tilemapSize;
-//uniform vec2 tileSize;
+uniform float tileSize;
 
 void main()
 {

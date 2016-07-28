@@ -6,13 +6,20 @@ const char empty = ' ';
 
 ZombieTileMap::ZombieTileMap(const std::vector< std::vector<char> >& tiles, const std::string& textureFile, int tileSize)
 {
+    _texture.loadFromFile("media/"+textureFile);
+    _tileSize = tileSize;
     _tilemapShader.loadFromFile("zombietilemap.vert","zombietilemap.frag");
+    _tilemapShader.setParameter("tileGraphics",_texture);
+    _tilemapShader.setParameter("tileCount",sf::Vector2f(_texture.getSize()/_tileSize));
+    _tilemapShader.setParameter("tileSize",_tileSize);
+
     LoadTileMap(tiles);
-    LoadTileSheet(textureFile, tileSize);
 }
 
 void ZombieTileMap::LoadTileMap(const std::vector< std::vector<char> >& unpaddedTiles)
 {
+
+    std::cout << unpaddedTiles.size() << "x" << unpaddedTiles[0].size() << std::endl;
 
     //Add padding
     std::vector< std::vector<char> > paddedTiles = std::vector< std::vector<char> >(unpaddedTiles.size() + 2, std::vector<char>(unpaddedTiles[0].size() + 2, empty));
@@ -24,7 +31,8 @@ void ZombieTileMap::LoadTileMap(const std::vector< std::vector<char> >& unpadded
         }
     }
 
-    _tileMapImage.create(paddedTiles.size(),paddedTiles[0].size());
+
+    _tileMapImage.create(paddedTiles.size(), paddedTiles[0].size(), sf::Color(17, 17, 17, 255));
     for (uint column=1;column<paddedTiles.size()-1;column++)
     {
         for (uint row=1;row<paddedTiles[1].size()-1;row++)
@@ -54,17 +62,8 @@ void ZombieTileMap::LoadTileMap(const std::vector< std::vector<char> >& unpadded
     _tilemapShader.setParameter("tilemapSize",sf::Vector2f(_tileMapTexture.getSize()));
 
     _tileMapSprite.setTexture(_tileMapTexture);
-    _tileMapSprite.setTextureRect(sf::IntRect(0,0,_tileMapTexture.getSize().x*240,_tileMapTexture.getSize().y*240));
-    //_tileMapSprite.setOrigin(128*32,128*240);
+    _tileMapSprite.setTextureRect(sf::IntRect(0,0,_tileMapTexture.getSize().x*_tileSize,_tileMapTexture.getSize().y*240));
 
-}
-
-void ZombieTileMap::LoadTileSheet(const std::string& textureFile, int tileSize) {
-    _texture.loadFromFile("media/"+textureFile);
-    _tileSize = tileSize;
-    _tilemapShader.setParameter("tileGraphics",_texture);
-    _tilemapShader.setParameter("tileCount",sf::Vector2f(_texture.getSize()/_tileSize));
-    //_tilemapShader.setParameter("tileSize",_tileSize));
 }
 
 void ZombieTileMap::Draw(sf::RenderTarget& target)
