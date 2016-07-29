@@ -14,8 +14,8 @@ public:
 
     int GetTileSize() { return _tileSize; }
 
-    Bounds GetBoundsInTiles() { return Bounds(_tileMapImage.getSize()/_tileSize); }
-    Bounds GetBoundsInPixels() { return Bounds(_tileMapImage.getSize()); }
+    Bounds GetBoundsInTiles() { return Bounds(_tileMapImage.getSize()); }
+    Bounds GetBoundsInPixels() { return Bounds(_tileMapImage.getSize()*_tileSize); }
 
     void Draw(sf::RenderTarget& target);
 
