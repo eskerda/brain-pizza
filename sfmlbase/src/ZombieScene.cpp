@@ -2,11 +2,14 @@
 #include "BNode.h"
 
 
+
+int worldSize = 60;
+
 void ZombieScene::Enter()
 {
-    steps = 1;
-	lives = 3;
-	immunity = 3;
+    steps = 7;
+    lives = 3;
+    immunity = 3;
 
     Input::SetWindowCaption("Zombie pizza delivery attack turbo ultra in the night");
     Input::SetWindowSize(sf::Vector2u(1000,700));
@@ -21,7 +24,7 @@ void ZombieScene::Enter()
 
     bike = new Bike();
 
-    tiles = World::generate(50, 50, steps);
+    tiles = World::generate(worldSize, worldSize, steps);
 
     // tiles =
     // {
@@ -58,13 +61,13 @@ void ZombieScene::Update(float dt)
 
     if (Input::IsKeyJustPressed(Input::DEBUG_D)) {
         steps++;
-        tiles = World::generate(50, 50, steps);
+        tiles = World::generate(worldSize, worldSize, steps);
         shaderTileMap->LoadTileMap(tiles);
     }
 
-    if (Input::IsKeyJustPressed(Input::DEBUG_F)) {
+    if (Input::IsKeyJustPressed(Input::DEBUG_F) && steps > 0) {
         steps--;
-        tiles = World::generate(50, 50, steps);
+        tiles = World::generate(worldSize, worldSize, steps);
         shaderTileMap->LoadTileMap(tiles);
     }
 }
@@ -117,7 +120,7 @@ void ZombieScene::AliveUpdate(float dt)
 
 void ZombieScene::Draw(sf::RenderTarget& rt)
 {
-    rt.clear(sf::Color(0,162,232));
+    rt.clear(sf::Color(100,0,0));
 
     shaderTileMap->Draw(rt);
 
