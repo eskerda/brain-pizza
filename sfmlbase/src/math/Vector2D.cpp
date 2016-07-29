@@ -16,3 +16,4 @@ std::ifstream& operator>>(std::ifstream& is, Vector2D& lhs)
   return is;
 }
 
+Vector2D Vector2D::ORIGIN = {0,0};

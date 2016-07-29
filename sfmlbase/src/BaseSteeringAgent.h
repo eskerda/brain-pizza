@@ -13,6 +13,16 @@
 
 class BaseSteeringAgent : public MovingEntity {
 public:
+    BaseSteeringAgent(Vector2D pos, Sprite* _sprite, float max_speed = 60, float max_force = 10) :
+        MovingEntity(pos, 30, max_speed, max_force)
+    {
+        sprite = _sprite;
+        sprite->OriginToCenter();
+        sprite->setPosition(pos);
+        steering = new SteeringBehavior(this);
+        decelerationPercent = 0;
+    }
+
     BaseSteeringAgent(Vector2D pos, const std::string& sprite_file, float max_speed = 60, float max_force = 10) :
         MovingEntity(pos, 30, max_speed, max_force) 
     {

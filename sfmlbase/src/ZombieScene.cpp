@@ -2,6 +2,7 @@
 #include "BNode.h"
 
 
+#include "Zombie.h"
 
 int worldSize = 60;
 
@@ -42,6 +43,18 @@ void ZombieScene::Enter()
     // };
 
     shaderTileMap = new ZombieTileMap(tiles, "roads.png", 240);
+
+    Bounds b = shaderTileMap->GetBoundsInPixels();
+
+    std::cout << b << std::endl;
+
+
+    int numZombies = 500;
+    for (int i = 0; i < numZombies; i++) {
+        new Zombie(RandInBounds(b, 10), b, bike);
+    }
+    new Zombie(Vector2D(300,300), b, bike);
+
 }
 
 void ZombieScene::Update(float dt)
@@ -79,6 +92,9 @@ void ZombieScene::DeadUpdate(float dt)
 
 void ZombieScene::AliveUpdate(float dt)
 {
+    for(Zombie * z : SelfRegister<Zombie*>::getAll()) {
+        z->Update(dt);
+    }
 
     bike->Update(dt);
 
@@ -95,10 +111,8 @@ void ZombieScene::AliveUpdate(float dt)
 
     if (immunity <= 0) {
         //Check colisions with zombies
-        /*
-        for (unsigned int i = 0; i < zombies.GetUsedSize(); i++) {
-            const Zombie& entity = zombies[i];
-            if (entity.Pos().Distance(ship->Pos()) < 50) {
+        for (Zombie* z : SelfRegister<Zombie*>::getAll()) {
+            if (z->Pos().Distance(bike->Pos()) < 50) {
                 immunity = 2;
                 lives--;
                 if (lives == 0) {
@@ -107,7 +121,6 @@ void ZombieScene::AliveUpdate(float dt)
                 break;
             }
         }
-*/
     } else {
         immunity -= dt;
     }
@@ -125,6 +138,10 @@ void ZombieScene::Draw(sf::RenderTarget& rt)
     shaderTileMap->Draw(rt);
 
     bike->DrawStroke(rt);
+
+    for(Zombie * z : SelfRegister<Zombie*>::getAll()) {
+        z->Draw(rt);
+    }
 
     if (immunity > 0) {
         if (((int)(immunity*5))%3) {
@@ -153,6 +170,7 @@ void ZombieScene::Exit()
 
     delete bike;
     delete hearth;
+    SelfRegister<Zombie*>::destroyAll();
 
     Input::ResetCamera();
 

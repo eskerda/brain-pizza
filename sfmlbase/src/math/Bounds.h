@@ -96,7 +96,11 @@ struct Bounds : public sf::Rect<float>
 
 inline std::ostream& operator<<(std::ostream& os, const Bounds& rhs)
 {
-  os << " " << rhs.left << " " << rhs.top << " " << rhs.width << " " << rhs.height;
+    os << " " << rhs.left << " " << rhs.top << " " << rhs.width << " " << rhs.height;
+    return os;
+}
 
-  return os;
+inline Vector2D RandInBounds(const Bounds& b, float padding = 0.0f)
+{
+    return Vector2D(RandInRange(b.left + padding, b.width - padding), RandInRange(b.top + padding, b.height - padding));
 }

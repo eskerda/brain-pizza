@@ -25,6 +25,9 @@ struct Vector2D : public sf::Vector2f
   bool Equals(float px, float py) {
       return x == px && y == py;
   }
+
+  static Vector2D ORIGIN;
+
   //sets x and y to zero
   void Zero(){x=0.0; y=0.0;}
 
@@ -48,7 +51,7 @@ struct Vector2D : public sf::Vector2f
   //X axis to right like a Window app)
   inline int       Sign(const Vector2D& v2) const;
 
-  float Angle(const Vector2D& other) const
+  float Angle(const Vector2D& other = Vector2D::ORIGIN) const
   {
     float deltaY = other.y - y;
 	float deltaX = other.x - x;
