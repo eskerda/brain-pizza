@@ -28,7 +28,9 @@ void ZombieTileMap::LoadTileMap(const std::vector< std::vector<char> >& unpadded
         for (uint row=0;row<unpaddedTiles[0].size();row++)
         {
             paddedTiles[column+1][row+1] = unpaddedTiles[column][row];
+            std::cout << unpaddedTiles[column][row] << std::flush;
         }
+        std::cout << std::endl;
     }
 
 

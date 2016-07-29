@@ -89,44 +89,23 @@ class Room {
         // Creates 2 random rooms, splitted from this room
         var res = [];
         var r1, r2;
-        var is_horizontal;
-
-        if (random(0, 1) == 0) {
-            // Horizontal split
-            var width = this.width;
-            var height = random(1, this.height);
-            r1 = new Room(width, height, this.square, this.options);
-            r2 = new Room(width, this.height - height, this.square,
-                          this.options);
-            r1.position = new Point(this.position.x, this.position.y);
-            r2.position = new Point(this.position.x, this.position.y + height);
-            is_horizontal = true;
+        var is_horizontal = random(0, 1);
+        var ratio = 0.45;
+        if (is_horizontal == 1) {
+            var h = parseInt(this.height * ratio);
+            r1 = new Room(this.width, h, this.square, this.options);
+            r1.position = new Point(this.position.x, this.position.y)
+            r2 = new Room(this.width, this.height - h, this.square, this.options)
+            r2.position = new Point(this.position.x, this.position.y + h)
         } else {
-            // Vertical split
-            var width = random(1, this.width);
-            var height = this.height;
-            r1 = new Room(width, height, this.square, this.options);
-            r2 = new Room(this.width - width, height, this.square,
-                          this.options);
+            var w = parseInt(this.width * ratio);
+            r1 = new Room(w, this.height, this.square, this.options);
             r1.position = new Point(this.position.x, this.position.y);
-            r2.position = new Point(this.position.x + width, this.position.y);
-            is_horizontal = false;
+            r2 = new Room(this.width - w, this.height, this.square, this.options);
+            r2.position = new Point(this.position.x + w, this.position.y);
         }
-
-        var x_ratio = 0.45;
-        var y_ratio = 0.45;
-        var res = [r1, r2];
-
-        for (var i = 0; i < res.length; i++) {
-            if (is_horizontal)
-                var ratio = res[i].height / res[i].width;
-            else
-                var ratio = res[i].width / res[i].height;
-            if (ratio < x_ratio) {
-                return this.random_split();
-            }
-        }
-
+        console.log(r1, r2);
+        res = [r1, r2];
         return res;
     }
 

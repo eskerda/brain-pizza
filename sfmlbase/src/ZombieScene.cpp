@@ -1,8 +1,10 @@
 #include "ZombieScene.h"
+#include "BNode.h"
+
 
 void ZombieScene::Enter()
 {
-
+    steps = 1;
 	lives = 3;
 	immunity = 3;
 
@@ -19,19 +21,22 @@ void ZombieScene::Enter()
 
     ship = new Ship();
 
-    tiles =
-    {
-        {'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a'},
-        {'a',' ',' ',' ',' ',' ',' ','r','r','r','r','r',' ',' ','a',' ',' ',' ',' ',' ','a'},
-        {'a',' ',' ',' ',' ',' ',' ','r','r','r','r','r',' ',' ','a','r','r','r',' ',' ','a'},
-        {'a',' ',' ',' ',' ',' ',' ','r','r','r','r','r',' ',' ','a','r','r','r',' ',' ','a'},
-        {'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a'},
-        {'a',' ',' ',' ',' ',' ',' ',' ','a',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','a'},
-        {'a',' ',' ','r','r','r','r',' ','a',' ',' ',' ','r','r','r','r','r','r',' ',' ','a'},
-        {'a',' ',' ','r','r','r','r',' ','a',' ',' ',' ','r','r','r','r','r','r',' ',' ','a'},
-        {'a',' ',' ',' ',' ',' ',' ',' ','a',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','a'},
-        {'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a'},
-    };
+    tiles = World::generate(50, 50, steps);
+
+    // tiles =
+    // {
+    //     {'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a'},
+    //     {'a',' ','r','r',' ',' ','a',' ','r','r','r','r','r','r',' ','a'},
+    //     {'a',' ','r','r',' ',' ','a',' ','r','r','r','r','r','r',' ','a'},
+    //     {'a',' ','r','r',' ',' ','a',' ','r','r','r','r','r','r',' ','a'},
+    //     {'a',' ',' ',' ',' ',' ','a',' ',' ',' ',' ',' ',' ',' ',' ','a'},
+    //     {'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a'},
+    //     {'a','r','r','r',' ',' ','a',' ','r','r','r','r','r',' ',' ','a'},
+    //     {'a','r','r','r',' ',' ','a',' ','r','r','r','r','r',' ',' ','a'},
+    //     {'a','r','r','r',' ',' ','a',' ','r','r','r','r','r',' ',' ','a'},
+    //     {'a','r','r','r',' ',' ','a',' ',' ',' ',' ',' ',' ',' ',' ','a'},
+    //     {'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a'},
+    // };
 
     shaderTileMap = new ZombieTileMap(tiles, "roads.png", 240);
 }
@@ -49,6 +54,18 @@ void ZombieScene::Update(float dt)
     else
     {
         DeadUpdate(dt);
+    }
+
+    if (Input::IsKeyJustPressed(Input::DEBUG_D)) {
+        steps++;
+        tiles = World::generate(50, 50, steps);
+        shaderTileMap->LoadTileMap(tiles);
+    }
+
+    if (Input::IsKeyJustPressed(Input::DEBUG_F)) {
+        steps--;
+        tiles = World::generate(50, 50, steps);
+        shaderTileMap->LoadTileMap(tiles);
     }
 }
 

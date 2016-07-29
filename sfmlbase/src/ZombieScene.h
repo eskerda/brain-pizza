@@ -33,6 +33,7 @@ private:
 	Ship* ship;
     float immunity;
     float fase;
+    int steps;
 
     //SelfGrowingPool<Zombie> zombies;
 
