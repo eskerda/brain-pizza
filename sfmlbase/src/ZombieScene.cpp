@@ -4,7 +4,7 @@
 
 #include "Zombie.h"
 
-int worldSize = 60;
+Vector2D worldSize(100, 60);
 
 void ZombieScene::Enter()
 {
@@ -25,7 +25,7 @@ void ZombieScene::Enter()
 
     bike = new Bike();
 
-    tiles = World::generate(worldSize, worldSize, steps);
+    tiles = World::generate(worldSize.x, worldSize.y, steps);
 
     // tiles =
     // {
@@ -74,13 +74,13 @@ void ZombieScene::Update(float dt)
 
     if (Input::IsKeyJustPressed(Input::DEBUG_D)) {
         steps++;
-        tiles = World::generate(worldSize, worldSize, steps);
+        tiles = World::generate(worldSize.x, worldSize.y, steps);
         shaderTileMap->LoadTileMap(tiles);
     }
 
     if (Input::IsKeyJustPressed(Input::DEBUG_F) && steps > 0) {
         steps--;
-        tiles = World::generate(worldSize, worldSize, steps);
+        tiles = World::generate(worldSize.x, worldSize.y, steps);
         shaderTileMap->LoadTileMap(tiles);
     }
 }

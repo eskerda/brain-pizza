@@ -28,9 +28,9 @@ void ZombieTileMap::LoadTileMap(const std::vector< std::vector<char> >& unpadded
         for (uint row=0;row<unpaddedTiles[0].size();row++)
         {
             paddedTiles[column+1][row+1] = unpaddedTiles[column][row];
-            std::cout << unpaddedTiles[column][row] << std::flush;
+            // std::cout << unpaddedTiles[column][row] << std::flush;
         }
-        std::cout << std::endl;
+        // std::cout << std::endl;
     }
 
 
@@ -51,11 +51,9 @@ void ZombieTileMap::LoadTileMap(const std::vector< std::vector<char> >& unpadded
             } else {
                 index = 16;
             }
-            std::cout << (int)index << " ";
             sf::Color tileIndex(index, index, index, 255);
             _tileMapImage.setPixel(column, row, tileIndex);
         }
-        std::cout << std::endl;
     }
     _tileMapTexture.loadFromImage(_tileMapImage);
 
