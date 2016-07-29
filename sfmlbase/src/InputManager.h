@@ -75,6 +75,7 @@ public:
         MOVE_UP2, MOVE_DOWN2, MOVE_LEFT2, MOVE_RIGHT2,
 		MENU_UP, MENU_DOWN,
         PLUS, MINUS,
+        PG_UP, PG_DOWN,
         DEBUG_R, DEBUG_G, DEBUG_D, DEBUG_F, DEBUG_C, DEBUG_H, DEBUG_Z, DEBUG_P, DEBUG_B,
 		DEBUG_F1, DEBUG_F2, DEBUG_F3,
 		KEYS_SIZE
@@ -109,6 +110,8 @@ public:
 		key_map[DEBUG_F3] = sf::Keyboard::F3;
         key_map[PLUS] = sf::Keyboard::Add;
         key_map[MINUS] = sf::Keyboard::Subtract;
+        key_map[PG_UP] = sf::Keyboard::PageUp;
+        key_map[PG_DOWN] = sf::Keyboard::PageDown;
 
 		for(int i = 0; i < KEYS_SIZE; i++) key_states[i] = RELEASED;
 		for(int i = 0; i < sf::Mouse::ButtonCount; i++) button_states[i] = RELEASED;

@@ -49,10 +49,12 @@ void Input::MoveCameraWithArrows(float velocity, float dt) {
 //Useful for debug pourposes
 void Input::ChangeZoomWithPlusAndMinus(float zoomVel, float dt) {
     float zoom = Input::GetZoom();
-    if (Input::IsKeyPressed(Input::PLUS)) {
+    if (Input::IsKeyPressed(Input::PLUS) ||
+        Input::IsKeyPressed(Input::PG_UP)) {
         zoom += zoomVel*dt;
     }
-    if (Input::IsKeyPressed(Input::MINUS)) {
+    if (Input::IsKeyPressed(Input::MINUS) ||
+        Input::IsKeyPressed(Input::PG_DOWN)) {
         zoom -= zoomVel*dt;
     }
     Input::SetZoom(zoom);
