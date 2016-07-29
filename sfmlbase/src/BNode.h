@@ -18,8 +18,8 @@ struct BNode {
     {}
 
     void divide() {
-        bool horizontal = RandBool();
-        float ratio = 0.45;
+        bool horizontal = h>w;
+        float ratio = RandInRange(0.30,0.60);
         if (horizontal) {
             int _h = h*ratio;
             left = new BNode(x, y, w, _h);
