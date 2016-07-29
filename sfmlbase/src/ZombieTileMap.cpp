@@ -34,7 +34,7 @@ void ZombieTileMap::LoadTileMap(const std::vector< std::vector<char> >& unpadded
     }
 
 
-    _tileMapImage.create(paddedTiles.size(), paddedTiles[0].size(), sf::Color(17, 17, 17, 255));
+    _tileMapImage.create(paddedTiles.size(), paddedTiles[0].size(), sf::Color(16, 16, 17, 255));
     for (uint column=1;column<paddedTiles.size()-1;column++)
     {
         for (uint row=1;row<paddedTiles[1].size()-1;row++)
