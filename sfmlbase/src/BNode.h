@@ -1,9 +1,7 @@
 #pragma once
 
 #include "math/Bounds.h"
-
-const float w_ratio = 0.45;
-const float h_ratio = 0.45;
+#include "math/utils.h"
 
 struct BNode {
     BNode * left;
@@ -72,12 +70,12 @@ public:
         std::vector< std::vector<char> > tiles = std::vector< std::vector<char> >(w, std::vector<char>(h, ' '));
         for (BNode* node: leafs) {
             for (int x = node->x; x < node->x + node->w + 1; x++) {
-                tiles[node->y][x] = 'a';
-                tiles[node->y+node->h][x] = 'a';
+                tiles[x][node->y] = 'a';
+                tiles[x][node->y+node->h] = 'a';
             }
             for (int y = node->y; y < node->y + node->h + 1; y++) {
-                tiles[y][node->x] = 'a';
-                tiles[y][node->x+node->w] = 'a';
+                tiles[node->x][y] = 'a';
+                tiles[node->x+node->w][y] = 'a';
             }
         }
         return tiles;
