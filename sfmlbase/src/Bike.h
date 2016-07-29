@@ -9,11 +9,11 @@
 #include "BaseSteeringAgent.h"
 #include "Stroke.hpp"
 
-class Ship : public BaseSteeringAgent {
+class Bike : public BaseSteeringAgent {
 public:
 
-    Ship(const Vector2D& pos = Vector2D(0,0))
-		: BaseSteeringAgent(pos, "media/ship.png", 220.f, 0.05f)
+    Bike(const Vector2D& pos = Vector2D(0,0))
+        : BaseSteeringAgent(pos, "media/ship.png", 800.f, 0.06f)
 	{
 		sprite->scale(0.5f,0.5f);
 		decelerationPercent = 0.2;
@@ -28,10 +28,10 @@ public:
 		float vel = m_vVelocity.Length();
 
         if (Input::IsKeyPressed(Input::MOVE_UP) || Input::IsKeyPressed(Input::MOVE_UP2)) {
-			vel += 90*dt;
+            vel += 190*dt;
 		}
         if (Input::IsKeyPressed(Input::MOVE_DOWN) || Input::IsKeyPressed(Input::MOVE_DOWN2)) {
-			vel -= 90*dt;
+            vel -= 190*dt;
 		}
         if (Input::IsKeyPressed(Input::MOVE_LEFT) || Input::IsKeyPressed(Input::MOVE_LEFT2)) {
 			RotateHeadingByAngle(-0.0035*dt*(vel+25));
@@ -40,7 +40,7 @@ public:
 			RotateHeadingByAngle(0.0035*dt*(vel+25));
 		}
 
-		m_vVelocity = vel*Heading()*0.996;
+        m_vVelocity = vel*Heading()*0.997;
 		m_vVelocity.Truncate(m_dMaxSpeed);
 		m_vPos += m_vVelocity * dt;
 

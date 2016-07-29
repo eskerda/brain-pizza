@@ -9,7 +9,7 @@
 
 #include "Scene.h"
 #include "selfgrowingpool.h"
-#include "Ship.h"
+#include "Bike.h"
 #include "RotoMessage.h"
 #include "ZombieTileMap.h"
 
@@ -30,7 +30,7 @@ private:
 	sf::Text timer;
 	int lives;
     RotoMessage loser;
-	Ship* ship;
+    Bike* bike;
     float immunity;
     float fase;
     int steps;

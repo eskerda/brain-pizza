@@ -13,13 +13,13 @@ void ZombieScene::Enter()
 
     fase = 0;
 
-	hearth = new Sprite("media/heart.png");
-	hearth->setScale(0.4,0.4);
+    hearth = new Sprite("media/heart.png");
+    hearth->setScale(0.4,0.4);
 
     timer.setFont(FontResMan::GetDefaultFont());
-	timer.setPosition(35, 35);
+    timer.setPosition(35, 35);
 
-    ship = new Ship();
+    bike = new Bike();
 
     tiles = World::generate(50, 50, steps);
 
@@ -76,10 +76,11 @@ void ZombieScene::DeadUpdate(float dt)
 
 void ZombieScene::AliveUpdate(float dt)
 {
-    ship->Update(dt);
 
-    //Input::SetCameraCenter(ship->Pos());
-    Input::SetCameraCenter(ship->Pos()+Vector2D(15*sin(fase),20*cos(fase/2)));
+    bike->Update(dt);
+
+    //Input::SetCameraCenter(bike->Pos());
+    Input::SetCameraCenter(bike->Pos()+Vector2D(15*sin(fase),20*cos(fase/2)));
 
 
 //TODO: Fer zoom out relatiu a la velocitat
@@ -120,37 +121,37 @@ void ZombieScene::Draw(sf::RenderTarget& rt)
 
     shaderTileMap->Draw(rt);
 
-	ship->DrawStroke(rt);
+    bike->DrawStroke(rt);
 
-	if (immunity > 0) {
-		if (((int)(immunity*5))%3) {
-			ship->Draw(rt);
-		}
-	} else {
-		ship->Draw(rt);
-	}
+    if (immunity > 0) {
+        if (((int)(immunity*5))%3) {
+            bike->Draw(rt);
+        }
+    } else {
+        bike->Draw(rt);
+    }
 
-	Input::StartGuiDraw();
-	for (int i = 0; i < lives; i++) {
-		hearth->setPosition(Input::GetWindowBounds().width - 120 - i*100, 35);
-		rt.draw(*hearth);
-	}
-	if (lives <= 0) {
-		loser.Draw(rt);
-	}
-	timer.setString("Time: " + ftos(fase));
-	rt.draw(timer);
-	Input::EndGuiDraw();
+    Input::StartGuiDraw();
+    for (int i = 0; i < lives; i++) {
+        hearth->setPosition(Input::GetWindowBounds().width - 120 - i*100, 35);
+        rt.draw(*hearth);
+    }
+    if (lives <= 0) {
+        loser.Draw(rt);
+    }
+    timer.setString("Time: " + ftos(fase));
+    rt.draw(timer);
+    Input::EndGuiDraw();
 
 }
 
 void ZombieScene::Exit()
 {
 
-	delete ship;
-	delete hearth;
+    delete bike;
+    delete hearth;
 
-	Input::ResetCamera();
+    Input::ResetCamera();
 
 }
 
