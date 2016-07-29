@@ -17,6 +17,13 @@ struct BNode {
         , h(_h)
     {}
 
+    ~BNode() {
+        if (left != nullptr)
+            delete left;
+        if (right != nullptr)
+            delete right;
+    }
+
     void divide() {
         bool horizontal = h>w;
         float ratio = RandInRange(0.30,0.60);
@@ -53,11 +60,7 @@ class World {
 public:
     static std::vector< std::vector<char> > generate(int w, int h, int steps) {
         BNode * room_tree = new BNode(0, 0, w-1, h-1);
-        std::cout << "Room tree created" << std::endl;
-        std::cout << "Dividing shit for " << steps << std::endl;
         room_tree->divide(steps);
-        std::cout << "Divided" << std::endl;
-
 
         std::vector<BNode*> leafs;
         room_tree->leafs(leafs);
@@ -78,6 +81,9 @@ public:
                 tiles[node->x+node->w][y] = 'a';
             }
         }
+
+        delete room_tree;
+
         return tiles;
     }
 };
