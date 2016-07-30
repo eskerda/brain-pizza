@@ -76,7 +76,7 @@ public:
 		MENU_UP, MENU_DOWN,
         PLUS, MINUS,
         PG_UP, PG_DOWN,
-        DEBUG_R, DEBUG_G, DEBUG_D, DEBUG_F, DEBUG_C, DEBUG_H, DEBUG_Z, DEBUG_P, DEBUG_B,
+        DEBUG_R, DEBUG_G, DEBUG_D, DEBUG_F, DEBUG_C, DEBUG_H, DEBUG_Z, DEBUG_P, DEBUG_B, DEBUG_Q, DEBUG_E,
 		DEBUG_F1, DEBUG_F2, DEBUG_F3,
 		KEYS_SIZE
 	};
@@ -105,6 +105,8 @@ public:
 		key_map[DEBUG_Z] = sf::Keyboard::Z;
 		key_map[DEBUG_P] = sf::Keyboard::P;
         key_map[DEBUG_B] = sf::Keyboard::B;
+        key_map[DEBUG_Q] = sf::Keyboard::Q;
+        key_map[DEBUG_E] = sf::Keyboard::E;
 		key_map[DEBUG_F1] = sf::Keyboard::F1;
 		key_map[DEBUG_F2] = sf::Keyboard::F2;
 		key_map[DEBUG_F3] = sf::Keyboard::F3;

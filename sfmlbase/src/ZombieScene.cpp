@@ -71,19 +71,24 @@ void ZombieScene::Update(float dt)
         DeadUpdate(dt);
     }
 
-    if (Input::IsKeyJustPressed(Input::DEBUG_G)) {
+    if (Input::IsKeyJustPressed(Input::DEBUG_E)) {
         steps++;
         tiles = World::generate(worldSize.x, worldSize.y, steps);
         shaderTileMap->LoadTileMap(tiles);
     }
 
-    if (Input::IsKeyJustPressed(Input::DEBUG_F) && steps > 0) {
+    if (Input::IsKeyJustPressed(Input::DEBUG_Q) && steps > 0) {
         steps--;
         tiles = World::generate(worldSize.x, worldSize.y, steps);
         shaderTileMap->LoadTileMap(tiles);
     }
 
-    if (Input::IsKeyJustPressed(Input::DEBUG_R) && steps > 0) {
+    if (Input::IsKeyJustPressed(Input::DEBUG_F)) {
+        tiles = World::generate(worldSize.x, worldSize.y, steps);
+        shaderTileMap->LoadTileMap(tiles);
+    }
+
+    if (Input::IsKeyJustPressed(Input::DEBUG_R)) {
         SceneManager::Change(new ZombieScene());
     }
 }
