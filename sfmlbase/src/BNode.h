@@ -54,22 +54,38 @@ struct BNode {
             right->leafs(stack);
         }
     }
+
+    BNode * grow_room() {
+        // Full room
+        int _x = x + 1;
+        int _y = y + 1;
+        int _w = w - 1;
+        int _h = h - 1;
+        int diff_x = 0;
+        int diff_y = 0;
+
+        // Random decrease
+        _w *= RandInRange(0, 1.5);
+        diff_x = (w - _w) * RandInRange(0, 1);
+        _h *= RandInRange(0, 1.5);
+        diff_y = (h - _h) * RandInRange(0, 1);
+
+        BNode * room = new BNode(_x + diff_x, _y + diff_y, _w, _h);
+        return room;
+    }
 };
 
 class World {
 public:
     static std::vector< std::vector<char> > generate(int w, int h, int steps) {
         BNode * room_tree = new BNode(0, 0, w-1, h-1);
+
         room_tree->divide(steps);
 
         std::vector<BNode*> leafs;
         room_tree->leafs(leafs);
 
-        /** TODO **/
-        // for (BNode* room: rooms) {
-        //     room
-        // }
-
+        BNode * room;
         std::vector< std::vector<char> > tiles = std::vector< std::vector<char> >(w, std::vector<char>(h, ' '));
         for (BNode* node: leafs) {
             for (int x = node->x; x < node->x + node->w + 1; x++) {
@@ -81,8 +97,19 @@ public:
                 tiles[node->x+node->w][y] = 'a';
             }
         }
+        for (BNode* node: leafs) {
+            room = node->grow_room();
+            for (int x = room->x; x < room->w + room->x; x++) {
+                for (int y = room->y; y < room->h + room->y; y++) {
+                    if (x < tiles.size() && y < tiles[x].size()) {
+                        tiles[x][y] = 'r';
+                    }
+                }
+            }
+        }
 
         delete room_tree;
+        delete room;
 
         return tiles;
     }

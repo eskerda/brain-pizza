@@ -48,6 +48,8 @@ void ZombieTileMap::LoadTileMap(const std::vector< std::vector<char> >& unpadded
                 if (paddedTiles[column][row+1] == road) index += 8;
                 if (paddedTiles[column-1][row] == road) index += 2;
                 if (paddedTiles[column+1][row] == road) index += 4;
+            } else if (paddedTiles[column][row] == house) {
+                index = 0;
             } else {
                 index = 16;
             }
