@@ -1,7 +1,6 @@
 #include "ZombieScene.h"
+
 #include "BNode.h"
-
-
 #include "Zombie.h"
 
 Vector2D worldSize(100, 60);
@@ -72,7 +71,7 @@ void ZombieScene::Update(float dt)
         DeadUpdate(dt);
     }
 
-    if (Input::IsKeyJustPressed(Input::DEBUG_D)) {
+    if (Input::IsKeyJustPressed(Input::DEBUG_G)) {
         steps++;
         tiles = World::generate(worldSize.x, worldSize.y, steps);
         shaderTileMap->LoadTileMap(tiles);
@@ -82,6 +81,10 @@ void ZombieScene::Update(float dt)
         steps--;
         tiles = World::generate(worldSize.x, worldSize.y, steps);
         shaderTileMap->LoadTileMap(tiles);
+    }
+
+    if (Input::IsKeyJustPressed(Input::DEBUG_R) && steps > 0) {
+        SceneManager::Change(new ZombieScene());
     }
 }
 
@@ -103,11 +106,6 @@ void ZombieScene::AliveUpdate(float dt)
 
 
 //TODO: Fer zoom out relatiu a la velocitat
-
-    static bool blue = false;
-    if (Input::IsKeyJustPressed(Input::DEBUG_B)) {
-        blue = !blue;
-    }
 
     if (immunity <= 0) {
         //Check colisions with zombies
